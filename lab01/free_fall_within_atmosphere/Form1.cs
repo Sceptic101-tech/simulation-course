@@ -10,14 +10,13 @@ namespace free_fall_within_atmosphere
             InitializeComponent();
         }
 
-        decimal t, dt, x, y, v0, cosa, sina, S, m, k, velocity_x, velocity_y;
+        decimal t, dt, x, y, v0, cosa, sina, S, m, k, velocity_x, velocity_y, max_height, max_distance;
         double angle;
         const decimal g = 9.81M;
         const decimal C = 0.15M;
         const decimal rho = 1.29M;
         const int max_graphics_count = 5;
 
-        decimal max_height = 0, max_distance = 0;
         int cur_graphic_idx = -1;
 
         HashSet<decimal> computed_dt = new HashSet<decimal>();
@@ -55,11 +54,14 @@ namespace free_fall_within_atmosphere
                 {
                     ClearGraphics(cur_graphic_idx+1);
                 }
-                //MainChart.Series[cur_series_idx].Name = "dt = " + dt.ToString();
                 // Блок с подготовительными вычислениями
                 t = 0;
                 x = 0;
                 y = HeightField.Value;
+
+                max_distance = x;
+                max_height = y;
+
                 v0 = VelocityField.Value;
                 angle = (double)AngleField.Value * Math.PI / 180;
                 cosa = (decimal)Math.Cos(angle);

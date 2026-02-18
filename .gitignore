@@ -29,3 +29,5 @@ secrets.json
 ## Файлы, создаваемые ReSharper и другими инструментами
 _ReSharper.*/
 *.DotSettings.user
+
+*.ipynb
