@@ -107,6 +107,8 @@ namespace free_fall_within_atmosphere
 
         private void ClearButton_Click(object sender, EventArgs e)
         {
+            if (timer1.Enabled)
+                return;
             // Очистка графиков и иных элементов от результатов предыдущих расчетов
             cur_graphic_idx = -1;
             LoggingListBox.Items.Clear();
