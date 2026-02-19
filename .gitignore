@@ -31,3 +31,5 @@ _ReSharper.*/
 *.DotSettings.user
 
 *.ipynb
+x64/
+x32/
