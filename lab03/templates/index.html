@@ -1,0 +1,90 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лесной пожар - симуляция</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <!-- <link rel="stylesheet" href="static/index.css"> -->
+</head>
+<body>
+    <div class="main_container">
+        <h1>Симуляция лесного пожара</h1>
+
+        <form method="POST" class="params-form">
+            <fieldset>
+                <h3>Параметры симуляции</h3>
+
+                <div class="input_field">
+                    <label for="NEW_TREE_PROBA">Вероятность появления нового дерева [0; 1]:</label>
+                    <input type="number" step="any" min="0" max="1" name="NEW_TREE_PROBA" value="{{ default.NEW_TREE_PROBA }}" required><br>
+                </div>
+
+                <div class="input_field">
+                <label for="START_FIRE_PROBA">Вероятность самовозгорания [0; 1]:</label>
+                <input type="number" step="any" min="0" max="1" name="START_FIRE_PROBA" value="{{ default.START_FIRE_PROBA }}" required><br>
+                </div>
+
+                <div class="input_field">
+                <label for="DIAGONAL_FIRE_START_PROBA">Коэффициент диагонального возгорания [0; 1]:</label>
+                <input type="number" step="any" min="0" max="1" name="DIAGONAL_FIRE_START_PROBA" value="{{ default.DIAGONAL_FIRE_START_PROBA }}" required><br>
+                </div>
+
+                <div class="input_field">
+                <label for="TEMPERATURE_COEFF">Температурный коэффициент (>0):</label>
+                <input type="number" step="any" min="0" name="TEMPERATURE_COEFF" value="{{ default.TEMPERATURE_COEFF }}" required><br>
+                </div>
+
+                <div class="input_field">
+                <label for="WIND_AFFLICTION">Влияние ветра (>=0):</label>
+                <input type="number" step="any" min="0" name="WIND_AFFLICTION" value="{{ default.WIND_AFFLICTION }}" required><br>
+                </div>
+
+                <div class="input_field">
+                <label for="WIND_DIRECTION">Направление ветра:</label>
+                <select name="WIND_DIRECTION" required>
+                    <option value="n" {% if default.WIND_DIRECTION == 'n' %}selected{% endif %}>Север</option>
+                    <option value="s" {% if default.WIND_DIRECTION == 's' %}selected{% endif %}>Юг</option>
+                    <option value="w" {% if default.WIND_DIRECTION == 'w' %}selected{% endif %}>Запад</option>
+                    <option value="e" {% if default.WIND_DIRECTION == 'e' %}selected{% endif %}>Восток</option>
+                    <option value="nw" {% if default.WIND_DIRECTION == 'nw' %}selected{% endif %}>Северо-запад</option>
+                    <option value="ne" {% if default.WIND_DIRECTION == 'ne' %}selected{% endif %}>Северо-восток</option>
+                    <option value="sw" {% if default.WIND_DIRECTION == 'sw' %}selected{% endif %}>Юго-запад</option>
+                    <option value="se" {% if default.WIND_DIRECTION == 'se' %}selected{% endif %}>Юго-восток</option>
+                </select><br>
+                </div>
+
+                <div class="input_field">
+                <label for="FOREST_FRACTION">Доля леса, покрытая деревьями [0; 1]:</label>
+                <input type="number" step="any" min="0" max="1" name="FOREST_FRACTION" value="{{ default.FOREST_FRACTION }}" required><br>
+                </div>
+
+                <div class="input_field">
+                <label for="NX">Ширина сетки (не менее 5 ед.):</label>
+                <input type="number" min="5" name="NX" value="{{ default.NX }}" required><br>
+                </div>
+
+                <div class="input_field">
+                <label for="NY">Высота сетки (не менее 5 ед.):</label>
+                <input type="number" min="5" name="NY" value="{{ default.NY }}" required><br>
+                </div>
+
+                <div class="input_field">
+                <label for="FRAMES">Количество кадров:</label>
+                <input type="number" min="1" name="FRAMES" value="{{ default.FRAMES }}" required><br>
+                </div>
+
+                <button type="submit">Запустить симуляцию</button>
+            </fieldset>
+        </form>
+
+        {% if gif_filename %}
+        <div class="result">
+            <h2>Результат:</h2>
+            <img src="{{ url_for('static', filename=gif_filename) }}" alt="Анимация пожара" class="animation">
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

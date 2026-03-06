@@ -60,7 +60,7 @@ NEW_TREE_PROBA = 1e-2
 START_FIRE_PROBA = 1e-3
 DIAGONAL_FIRE_START_PROBA = 0.8
 TEMPERATURE_COEFF = 1.1
-WIND_AFFLICTION = 0.8
+WIND_AFFLICTION = 0.9
 WIND_DIRECTION = 'sw'
 # Начальная доля леса, занятая деревьями.
 FOREST_FRACTION = 0.2
@@ -100,4 +100,4 @@ animate.X = X
 # Интервал между кадрами (мс)
 interval = 100
 anim = animation.FuncAnimation(fig, animate, interval=interval, frames=500)
-anim.save(f"static/fire_in_the_forest_{WIND_DIRECTION}.mp4", writer="ffmpeg")
+anim.save(f"static/fire_in_the_forest_{WIND_DIRECTION}.gif", writer="pillow")
