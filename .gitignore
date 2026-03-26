@@ -34,6 +34,8 @@ x64/
 x32/
 
 .venv*
-*.ipynb
 *.mp4
 *.gif
+readme_writer*
+
+__pycache__/
