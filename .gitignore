@@ -38,4 +38,6 @@ x32/
 *.gif
 readme_writer*
 
+.vscode/
+
 __pycache__/

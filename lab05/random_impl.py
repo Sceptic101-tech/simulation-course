@@ -18,15 +18,16 @@ class MagicBall:
                             "Звезды против", "Потряси меня еще"]
         else:
             self.answers = answers
-        self.prob = 1.0 / len(self.answers)
+        # Определение вероятностей наступления событий
+        self.probabilities = [(1.0 / len(self.answers)) for _ in range(len(self.answers))]
         self.generator = MLCG(89)
 
     def get_answer(self):
         """Возвращает случайный ответ из списка."""
         alpha = self.generator.random()
         cumulative = 0.0
-        for answer in self.answers:
-            cumulative += self.prob
+        for proba, answer in zip(self.probabilities, self.answers):
+            cumulative += proba
             if alpha < cumulative:
                 return answer
         return self.answers[-1]
